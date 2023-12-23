@@ -1,0 +1,102 @@
+@use "components/navbar";
+
+$lines: 1, 2, 3, 4, 5;
+
+@each $line in $lines {
+	.truncate-overflow-#{$line} {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: $line;
+		overflow: hidden;
+	}
+}
+.active {
+	@apply rounded-md bg-gray-400 bg-opacity-60 transition-all duration-300 ease-in-out;
+}
+
+// for small bg part
+.priority {
+	position: relative;
+	height: 100%;
+
+	&:after {
+		content: "";
+		position: absolute;
+		width: 8px;
+		height: 100%;
+		left: 0;
+		top: 0;
+	}
+}
+
+.horizontal-line {
+	position: relative;
+	box-shadow: 0px 4px 5px -7px black;
+	// &::after {
+	// 	content: "";
+	// 	position: absolute;
+	// 	display: block;
+	// 	top: 100%;
+	// 	left: 0;
+	// 	width: 100%;
+	// 	height: 1px;
+	// 	@apply bg-card;
+	// }
+}
+
+// for sidebar
+.link {
+	@apply flex cursor-pointer items-center justify-between gap-2 rounded-sm px-4 py-2 font-semibold text-gray-700 text-primary transition-all duration-200 ease-in-out hover:bg-gray-300 hover:bg-opacity-10;
+
+	a,
+	div {
+		@apply flex  items-center gap-2;
+		svg {
+			@apply h-9 w-9;
+		}
+		p {
+			@apply scale-100 text-xl  transition-all ease-linear;
+		}
+	}
+}
+
+.link-notext {
+	a,
+	div {
+		@apply p-0;
+		svg {
+			@apply h-9 w-9 duration-300;
+		}
+		p {
+			@apply scale-0;
+		}
+	}
+}
+
+.rounded-icon {
+	@apply cursor-pointer rounded-full p-2 hover:bg-gray-400 hover:bg-opacity-30;
+}
+
+.icon {
+	@apply cursor-pointer rounded-sm bg-gray-200 bg-opacity-20 p-2 text-2xl  transition-all duration-150 ease-in-out lg:text-5xl;
+}
+
+.post-icon {
+	@apply cursor-pointer  rounded-full p-1 text-2xl transition-all duration-150 ease-in-out  hover:bg-accent lg:text-4xl;
+}
+
+.counter {
+	@apply absolute right-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-400 text-[0.55rem] lg:h-5 lg:w-5 lg:text-[0.6rem];
+}
+
+.journal-icon-temp {
+	@apply cursor-pointer p-1 text-lg transition-all duration-150 ease-in-out hover:fill-red-500 lg:text-3xl;
+}
+
+.ce-paragraph {
+	line-height: 0.8 !important;
+}
+.ce-inline-toolbar {
+	background-color: #02315e !important;
+	z-index: 10 !important;
+}
