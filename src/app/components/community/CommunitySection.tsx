@@ -1,9 +1,12 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import CommunityCard from "../CommunityCard";
 import { useAppSelector } from "@/redux/store";
+import { useEffect } from "react";
 
 const CommunitySection = () => {
 	const isMyCommunity = useAppSelector(state => state.community.isMyCommunity);
+
+	useEffect(() => {}, []);
 
 	return (
 		<div>

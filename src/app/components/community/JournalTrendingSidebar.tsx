@@ -50,8 +50,8 @@ const TrendingCard = ({
 export default function JournalTrendingSidebar() {
 	return (
 		<main className="  hidden h-[calc(100dvh-4rem)] lg:block">
-			<aside className="h-full w-96  p-2">
-				<section className="mb-2">
+			<aside className="h-full w-96  p-4">
+				<section className="mb-2 py-1">
 					<h2 className="mb-4 text-lg font-bold">Trending Goals</h2>
 
 					<TrendingCard title="Learn a New Language" badgeName="Hot" noOfParticipants={200} />
