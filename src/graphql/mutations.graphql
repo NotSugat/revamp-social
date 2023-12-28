@@ -15,3 +15,9 @@ mutation DeleteTask($taskId: Int!) {
 mutation SetTodo($taskId: Int!, $todo: String!) {
 	setTodo(taskId: $taskId, todo: $todo)
 }
+
+# Commmunity Mutatation
+
+mutation CreateCommunity($input: CreateCommunityInput!) {
+	createCommunity(input: $input)
+}
