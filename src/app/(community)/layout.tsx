@@ -1,9 +1,9 @@
 import "@/app/globals.scss";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import ReduxProvider from "@/lib/providers/ReduxProvider";
 import ApolloClientProvider from "@/lib/providers/ApolloClientProvider";
 import Navbar from "../components/community/Navbar";
+import ReduxProvider from "@/lib/providers/ReduxProvider";
 
 export const metadata: Metadata = {
 	title: "Revamp",

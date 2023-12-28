@@ -4,6 +4,7 @@ import navbarReducer from "./features/navbarSlice";
 import goalReducer from "./features/goalSlice";
 import taskReducer from "./features/taskSlice";
 import todoReducer from "./features/todoSlice";
+import communityReducer from "./features/communitySlice";
 
 export const store = configureStore({
 	reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
 		goal: goalReducer,
 		task: taskReducer,
 		todo: todoReducer,
+		community: communityReducer,
 	},
 });
 

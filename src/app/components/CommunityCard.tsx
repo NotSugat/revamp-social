@@ -56,7 +56,7 @@ function GoalIcon(props: Props) {
 	);
 }
 
-function NewspaperIcon(props) {
+function NewspaperIcon(props: Props) {
 	return (
 		<svg
 			{...props}
