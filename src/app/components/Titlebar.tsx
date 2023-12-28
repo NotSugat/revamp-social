@@ -65,7 +65,7 @@ const Titlebar = () => {
 			<ul className="flex items-center gap-4">
 				<Li text="Home" path="/" icon="bx:bx-home" />
 				<Li text="Journals" path="journals" icon="mdi:journal-outline" />
-				<Li text="Goals" path="notifications" icon="octicon:goal-16" />
+				<Li text="Goals" path="goals" icon="octicon:goal-16" />
 				<Li text="Community" path="community" icon="bi:people" />
 			</ul>
 

@@ -99,3 +99,17 @@ query GetTodosOfTask($taskId: Int!) {
 		isDone
 	}
 }
+
+# Community
+
+query GetCommunities {
+	communities {
+		communityId
+		community
+		description
+		privacy
+		createdAt
+		updatedAt
+		privacy
+	}
+}

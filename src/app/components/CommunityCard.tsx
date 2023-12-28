@@ -1,37 +1,92 @@
-import { Card } from "@/components/ui/card";
+import { Community } from "@/generated/graphql";
+import { useRouter } from "next/navigation";
 
 interface Props {
 	className?: string;
 }
-export default function Component() {
+
+export function SkeletonCommunityCard() {
 	return (
-		<Card className="flex w-full items-center space-x-6 border-none bg-card p-6">
-			<img
-				alt="Vue.js logo"
-				className="h-16 w-16 rounded-lg"
-				height="70"
-				src="/assets/hero.webp"
-				style={{
-					aspectRatio: "70/70",
-					objectFit: "cover",
-				}}
-				width="70"
-			/>
-			<div className="flex flex-col space-y-2">
-				<span className="text-xl font-semibold">Vue.js</span>
-				<span className="text-gray-500">5.3K Members</span>
-				<div className="flex space-x-4">
-					<div className="flex items-center space-x-1">
-						<GoalIcon className="h-6 w-6" />
-						<span className="text-gray-500">1.2K Goals</span>
-					</div>
-					<div className="flex items-center space-x-1">
-						<NewspaperIcon className="h-6 w-6" />
-						<span className="text-gray-500">3K Journals</span>
-					</div>
+		<div className="flex animate-pulse items-center justify-between bg-card p-4">
+			<div className="flex items-center space-x-4">
+				<div className="rounded-md bg-[#34495e] p-2">
+					<div className="h-12 w-12 bg-[#95a5a6]" />
+				</div>
+				<div>
+					<div className="mb-2 h-4 w-32 bg-[#95a5a6]" />
+					<div className="mb-1 h-3 w-24 bg-[#95a5a6]" />
+					<div className="h-3 w-16 bg-[#95a5a6]" />
 				</div>
 			</div>
-		</Card>
+			<div className="flex items-center space-x-6">
+				<div className="flex items-center text-[#95a5a6]">
+					<div className="h-6 w-6 bg-[#95a5a6]" />
+					<div className="ml-2 h-3 w-12 bg-[#95a5a6]" />
+				</div>
+				<div className="flex items-center text-[#95a5a6]">
+					<div className="h-6 w-6 bg-[#95a5a6]" />
+					<div className="ml-2 h-3 w-12 bg-[#95a5a6]" />
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export function CommunityCard({ community }: { community: Community }) {
+	const router = useRouter();
+	return (
+		<div className="flex items-center justify-between rounded-sm bg-card p-4 ">
+			<div className="flex w-full items-center space-x-4">
+				<div className="rounded-md bg-[#34495e] p-2">
+					<CodepenIcon className="h-12 w-12 text-white" />
+				</div>
+				<div className="w-full">
+					<h2 className="font-semibold text-white transition-all duration-200 ease-in-out hover:cursor-pointer hover:text-blue-400">
+						{community.community}
+					</h2>
+					<p className=" w-full max-w-[90%] text-sm text-gray-200">{community.description}</p>
+					<p className="text-[#95a5a6]">{community?.users?.length || 0} Members</p>
+				</div>
+			</div>
+
+			<div className="flex items-center space-x-6">
+				<div className="flex  w-fit items-center text-[#95a5a6]">
+					<button title="Goals">
+						<GoalIcon className="h-6 w-6" />
+					</button>
+					<span className="ml-2 ">1.2K </span>
+				</div>
+				<div className="flex items-center text-[#95a5a6]">
+					<button title="Journals">
+						<NewspaperIcon className="h-6 w-6" />
+					</button>
+					<span className="ml-2">3K </span>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function CodepenIcon(props: Props) {
+	return (
+		<svg
+			{...props}
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+		>
+			<polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
+			<line x1="12" x2="12" y1="22" y2="15.5" />
+			<polyline points="22 8.5 12 15.5 2 8.5" />
+			<polyline points="2 15.5 12 8.5 22 15.5" />
+			<line x1="12" x2="12" y1="2" y2="8.5" />
+		</svg>
 	);
 }
 

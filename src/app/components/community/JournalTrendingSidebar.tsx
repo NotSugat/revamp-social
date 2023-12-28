@@ -63,7 +63,7 @@ export default function JournalTrendingSidebar() {
 					<TrendingCard title="Run a Marathon" badgeName="New" noOfParticipants={75} />
 				</section>
 				<section>
-					<h2 className="mb-4 rounded-xl  p-1 text-xl font-bold">Active Discussions</h2>
+					<h2 className="mb-4   p-1 text-xl font-bold">Active Discussions</h2>
 					<DiscussionCard title="Overcoming Procrastination" noOfParticipants={120} path="#" />
 					<DiscussionCard title="Maintaining a Healthy Diet" noOfParticipants={85} path="#" />
 					<DiscussionCard title="Learning to Code" noOfParticipants={45} path="#" />
