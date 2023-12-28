@@ -3,8 +3,7 @@ import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { itemContent } from "./styled-components/DropdownMenu";
-import { MenuDropdown } from "./styled-components/MenuDropdown";
+import { MenuDropdown, itemContent } from "./styled-components/MenuDropdown";
 
 const Li = ({
 	icon,
@@ -26,14 +25,14 @@ const Li = ({
 			)}
 		>
 			<Link href={`/${path}`} className="flex w-full items-center gap-1">
-				{icon ? <Icon icon={icon} className="hidden text-lg " /> : null}
+				{icon ? <Icon icon={icon} className="hidden text-lg lg:block " /> : null}
 				<span className=" ">{text}</span>
 			</Link>
 		</li>
 	);
 };
 
-const dropdownItems: itemContent = [
+const dropdownItems: itemContent[] = [
 	{
 		text: "Physical Health",
 		icon: "bx:bx-home",

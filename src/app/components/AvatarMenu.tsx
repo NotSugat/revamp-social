@@ -31,7 +31,13 @@ export function AvatarMenu() {
 						<span>Profile</span>
 					</DropdownMenuItem>
 
-					<DropdownMenuItem onClick={() => router.push("/dashboard")}>
+					<DropdownMenuItem
+						onClick={() =>
+							router.push(
+								process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://revampgoal.co/dashboard",
+							)
+						}
+					>
 						<Icon icon="radix-icons:dashboard" className="mr-2 h-4 w-4" />
 						<span>Go to Dashboard</span>
 					</DropdownMenuItem>
