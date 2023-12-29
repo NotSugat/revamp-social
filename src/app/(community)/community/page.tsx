@@ -7,6 +7,9 @@ import JournalTrendingSidebar from "@/app/components/community/JournalTrendingSi
 import { setIsMyCommunity } from "@/redux/features/communitySlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
+import { GetSingleCommunity } from "@/graphql/queries.graphql";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
 
 const Topbar = () => {
 	const dispatch = useDispatch<AppDispatch>();

@@ -113,3 +113,51 @@ query GetCommunities {
 		privacy
 	}
 }
+
+query GetSingleCommunity($communityId: Int!) {
+	community(communityId: $communityId) {
+		communityId
+		community
+		nametag
+		description
+		privacy
+		createdAt
+		updatedAt
+		journals {
+			journalId
+			title
+			content
+			date
+			sharedBy {
+				sharedBy {
+					firstName
+					lastName
+					username
+				}
+				sharedAt
+			}
+		}
+		goals {
+			goalId
+			title
+			description
+			priority
+			relatedArea
+			order
+			streak
+			isActive
+			deadline
+			isDone
+			createdAt
+			updatedAt
+			tasks {
+				taskId
+				title
+				description
+				priority
+				order
+				isDone
+			}
+		}
+	}
+}

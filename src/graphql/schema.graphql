@@ -167,11 +167,11 @@ type Comment {
   author: UserWithLessDetails!
 }
 type JournalLike {
-  likedBy: User!
+  likedBy: UserWithLessDetails!
   likedAt: Timestamp!
 }
 type JournalShare {
-  sharedBy: User!
+  sharedBy: UserWithLessDetails!
   sharedAt: Timestamp!
   sharedIn: Community!
 }
@@ -223,6 +223,8 @@ type Community {
   createdAt: Timestamp!
   updatedAt: Timestamp!
   users: [UserWithRole]!
+  goals: [Goal!]!
+  journals: [Journal!]!
 }
 type Query {
   getTodosOfTask(taskId: Int!): [Todo!]!
@@ -234,6 +236,7 @@ type Query {
   getAllQuestions: [Question!]!
   getAllAspects: [Aspect!]!
   getJournalsOfUser(userId: ID!): [Journal!]!
+  todayJournalDaily: Journal!
   getSingleGoal(goalId: Int!): Goal!
   getSingleTask(taskId: Int!): Task!
   getSingleTodo(todoId: Int!): Todo!
@@ -241,6 +244,7 @@ type Query {
   getSingleJournal(journalId: Int!): Journal!
   community(communityId: Int!): Community!
   communities: [Community!]!
+  myCommunities: [Community!]!
   searchCommunities(searchString: String!): [Community!]!
 }
 type Mutation {
@@ -253,6 +257,8 @@ type Mutation {
   deleteTask(taskId: Int!): String!
   deleteTodo(todoId: Int!): String!
   editGoal(goalId: Int!, title: String, description: String, priority: String, relatedArea: String, deadline: Timestamp, order: Int, isDone: Boolean, isActive: Boolean): String!
+  shareGoal(goalId: Int!, communityId: Int!): String!
+  publishGoal(goalId: Int!): String!
   editTask(taskId: Int!, title: String, description: String, priority: String, isDone: Boolean, deadline: Timestamp, order: Int, streak: Int): String!
   editTodo(todoId: Int!, todo: String, isDone: Boolean, order: Int): String!
   createCommunity(input: CreateCommunityInput!): String!
@@ -267,6 +273,9 @@ type Mutation {
   addUserToCommunity(communityId: Int!, userId: ID!): String!
   makeUserAdminOfCommunity(communityId: Int!, userId: ID!): String!
   enterInCommunity(communityId: Int!): String!
+  updateJournal(journalId: Int!, title: String, content: String): String!
+  shareJournal(journalId: Int!, communityId: Int!): String!
+  publishJournal(journalId: Int!): String!
 }
 input CreateCommunityInput {
   name: String!

@@ -27,7 +27,7 @@ export default function JournalPostCard() {
 			<CardContent>
 				<h2
 					className="my-2 text-lg font-bold transition-all duration-200 ease-in-out hover:text-blue-400"
-					onClick={() => router.push(`community/${id}`)}
+					onClick={() => router.push(`journal/${id}`)}
 				>
 					{`Tech Trends and "The Emerging Innovations" Insights`}
 				</h2>

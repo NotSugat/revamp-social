@@ -1,4 +1,5 @@
 import { Community } from "@/generated/graphql";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -41,9 +42,12 @@ export function CommunityCard({ community }: { community: Community }) {
 					<CodepenIcon className="h-12 w-12 text-white" />
 				</div>
 				<div className="w-full">
-					<h2 className="font-semibold text-white transition-all duration-200 ease-in-out hover:cursor-pointer hover:text-blue-400">
+					<Link
+						href={`community/${community.communityId}`}
+						className="font-semibold text-white transition-all duration-200 ease-in-out hover:cursor-pointer hover:text-blue-400"
+					>
 						{community.community}
-					</h2>
+					</Link>
 					<p className=" w-full max-w-[90%] text-sm text-gray-200">{community.description}</p>
 					<p className="text-[#95a5a6]">{community?.users?.length || 0} Members</p>
 				</div>
