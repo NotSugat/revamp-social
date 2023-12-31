@@ -121,6 +121,15 @@ query GetCommunities {
 		}
 	}
 }
+query GetUsers {
+	getAllUsers {
+		id
+		firstName
+		lastName
+		username
+		imageUrl
+	}
+}
 
 query GetSingleCommunity($communityId: Int!) {
 	community(communityId: $communityId) {
@@ -131,6 +140,15 @@ query GetSingleCommunity($communityId: Int!) {
 		privacy
 		createdAt
 		updatedAt
+		users {
+			user {
+				firstName
+				lastName
+				username
+				imageUrl
+			}
+			role
+		}
 		journals {
 			journalId
 			title
@@ -166,6 +184,22 @@ query GetSingleCommunity($communityId: Int!) {
 				order
 				isDone
 			}
+		}
+	}
+}
+
+query MyCommunities {
+	myCommunities {
+		communityId
+		community
+		users {
+			user {
+				firstName
+				lastName
+				username
+				imageUrl
+			}
+			role
 		}
 	}
 }

@@ -11,6 +11,7 @@ import { Community } from "@/generated/graphql";
 import JournalPostCard from "@/app/components/community/JournalPostCard";
 import { SkeletonCommunityCard } from "@/app/components/CommunityCard";
 import SkeletonCommunityPage from "@/app/components/skeleton/SkeletonCommunityPage";
+import InviteUsers from "@/app/components/community/InviteUsers";
 
 const Li = ({
 	icon,
@@ -93,7 +94,7 @@ export default function CommunityDetail({
 						<Button className="btn rounded-full ">Joined</Button>
 					</div>
 					<div className="flex items-center space-x-4">
-						<Button className="btn">Invite User</Button>
+						<InviteUsers />
 						<Button className=" rounded-full p-2 px-3">
 							<BellIcon className="h-4 w-4" />
 						</Button>
@@ -118,7 +119,7 @@ export default function CommunityDetail({
 							<p>{community?.description}</p>
 							<div className="flex items-center justify-between text-sm">
 								<span>Created {fullDate(community?.createdAt)}</span>
-								<span>7.9k Members</span>
+								<span>{community?.users.length} Members</span>
 							</div>
 							<Button className="w-full rounded-md bg-slate-600 px-4 py-2 text-foreground shadow-md transition-all duration-300 hover:bg-slate-500">
 								Share Goal

@@ -41,7 +41,10 @@ export default function Navbar() {
 					>
 						Create Post
 					</Button>
-					<BellIcon className="h-6 w-6 text-gray-200" />
+
+					<button className="" title="Notification">
+						<BellIcon className="h-6 w-6 text-gray-200" />
+					</button>
 					<AvatarMenu />
 				</div>
 			</nav>

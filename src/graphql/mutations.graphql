@@ -21,3 +21,41 @@ mutation SetTodo($taskId: Int!, $todo: String!) {
 mutation CreateCommunity($input: CreateCommunityInput!) {
 	createCommunity(input: $input)
 }
+
+mutation InviteUserToCommunity($communityId: Int!, $userId: ID!) {
+	inviteUserToCommunity(communityId: $communityId, userId: $userId)
+}
+
+mutation AcceptCommunityInvite($communityId: Int!) {
+	acceptCommunityInvite(communityId: $communityId)
+}
+mutation DeclineCommunityInvite($communityId: Int!) {
+	declineCommunityInvite(communityId: $communityId)
+}
+
+mutation LeaveCommunity($communityId: Int!) {
+	leaveCommunity(communityId: $communityId)
+}
+
+mutation BlockUserFromCommunity($communityId: Int!, $userId: ID!) {
+	blockUserFromCommunity(communityId: $communityId, userId: $userId)
+}
+mutation UnblockUserFromCommunity($communityId: Int!, $userId: ID!) {
+	unBlockUserFromCommunity(communityId: $communityId, userId: $userId)
+}
+
+mutation RemoveUserFromCommunity($communityId: Int!, $userId: ID!) {
+	removeUserFromCommunity(communityId: $communityId, userId: $userId)
+}
+
+mutation AddUserToCommunity($communityId: Int!, $userId: ID!) {
+	addUserToCommunity(communityId: $communityId, userId: $userId)
+}
+
+mutation MakeUserAdminOfCommunity($communityId: Int!, $userId: ID!) {
+	makeUserAdminOfCommunity(communityId: $communityId, userId: $userId)
+}
+
+mutation EnterInCommunity($communityId: Int!) {
+	enterInCommunity(communityId: $communityId)
+}
