@@ -9,6 +9,8 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Community } from "@/generated/graphql";
 import JournalPostCard from "@/app/components/community/JournalPostCard";
+import { SkeletonCommunityCard } from "@/app/components/CommunityCard";
+import SkeletonCommunityPage from "@/app/components/skeleton/SkeletonCommunityPage";
 
 const Li = ({
 	icon,
@@ -73,12 +75,17 @@ export default function CommunityDetail({
 		}
 	}, [data]);
 
+	if (loading) {
+		return <SkeletonCommunityPage />;
+	}
+
 	return (
 		<div key="1" className="min-h-screen  text-white">
 			<header className="bg-card p-4">
 				<div className="mx-auto flex max-w-6xl items-center justify-between">
 					<div className="flex items-center space-x-4">
 						<CodepenIcon className="h-10 w-10" />
+
 						<div>
 							<h1 className="text-2xl font-bold">{community?.community}</h1>
 							<p className="text-sm">{`c/${community?.nametag}`}</p>
