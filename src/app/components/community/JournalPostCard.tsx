@@ -4,14 +4,63 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Icon } from "@iconify/react/dist/iconify.js";
 import AvatarLogo from "../AvatarLogo";
 import { useRouter } from "next/navigation";
+import { Goal } from "@/generated/graphql";
+import { formatDate } from "@/lib/utils";
 
 interface Props {
 	className?: string;
 }
 
-export default function JournalPostCard() {
+export default function JournalPostCard({ item }: { item?: Goal }) {
 	const router = useRouter();
 	const id = 14;
+
+	if (item) {
+		return (
+			<Card className="h-[14rem] w-full rounded-lg border-none  p-1 shadow hover:cursor-pointer">
+				<CardHeader>
+					<div className="flex items-center space-x-2">
+						<AvatarLogo />
+
+						<div>
+							<p className="text-sm font-semibold">Sugat Sujakhu (he/him)</p>
+							<p className="text-xs text-gray-500">{formatDate(item.createdAt)}</p>
+						</div>
+					</div>
+				</CardHeader>
+				<CardContent>
+					<h2
+						className="my-2 text-lg font-bold transition-all duration-200 ease-in-out hover:text-blue-400"
+						onClick={() => router.push(`journal/${id}`)}
+					>
+						{item.title}
+					</h2>
+					<Badge className="mb-4" variant="secondary">
+						#technology
+					</Badge>
+				</CardContent>
+				<CardFooter className="flex items-center justify-between">
+					<div className="flex items-center space-x-1">
+						<HeartIcon className="cursor-pointer text-red-500 transition-colors duration-300 hover:fill-red-600 " />
+						<LightbulbIcon className="cursor-pointer text-yellow-500 transition-colors duration-300 hover:fill-yellow-600" />
+						<CelebrationIcon className="cursor-pointer text-green-500 transition-colors duration-300 hover:text-green-600" />
+						{/* <HandIcon className="text-green-500 transition-colors duration-300 hover:fill-green-600" /> */}
+						<TrophyIcon className="cursor-pointer text-blue-500 transition-colors duration-300 hover:fill-blue-600" />
+						<span className="text-sm">34 reactions</span>
+					</div>
+					<div className="flex items-center space-x-4">
+						<div className="flex items-center space-x-1">
+							<ReplyIcon className="text-gray-600" />
+							<span className="text-sm">21 comments</span>
+						</div>
+						<span className="text-sm text-gray-600">4 min read</span>
+						<BookmarkIcon className="text-gray-600" />
+					</div>
+				</CardFooter>
+			</Card>
+		);
+	}
+
 	return (
 		<Card className="h-[14rem] w-full rounded-lg border-none  p-1 shadow hover:cursor-pointer">
 			<CardHeader>

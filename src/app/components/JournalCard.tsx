@@ -10,7 +10,7 @@ import { Menu } from "@headlessui/react";
 import Tag from "./Tag";
 import { UserButton } from "@clerk/nextjs";
 
-const JournalCard = ({ id, journal: journal }: { id: number; journal: Journal }) => {
+const JournalCard = ({ id, journal: journal }: { id: number; journal: any }) => {
 	const [text, setText] = useState("");
 	const [isBookmarked, setIsBookmarked] = useState<Boolean>(false);
 	const [isInterested, setIsInterested] = useState<Boolean>(true);
@@ -112,9 +112,8 @@ const JournalCard = ({ id, journal: journal }: { id: number; journal: Journal })
 						<Menu.Item>
 							{({ active }) => (
 								<button
-									className={`${
-										active && "bg-blue-500"
-									} w-full p-1 text-start text-xs lg:text-base`}
+									className={`${active && "bg-blue-500"
+										} w-full p-1 text-start text-xs lg:text-base`}
 								>
 									Report
 								</button>

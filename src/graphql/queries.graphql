@@ -111,6 +111,14 @@ query GetCommunities {
 		createdAt
 		updatedAt
 		privacy
+
+		users {
+			user {
+				firstName
+				lastName
+				username
+			}
+		}
 	}
 }
 

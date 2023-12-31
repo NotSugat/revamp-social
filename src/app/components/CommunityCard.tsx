@@ -49,7 +49,7 @@ export function CommunityCard({ community }: { community: Community }) {
 						{community.community}
 					</Link>
 					<p className=" w-full max-w-[90%] text-sm text-gray-200">{community.description}</p>
-					<p className="text-[#95a5a6]">{community?.users?.length || 0} Members</p>
+					<p className="text-[#95a5a6]">{community?.users?.length} Members</p>
 				</div>
 			</div>
 

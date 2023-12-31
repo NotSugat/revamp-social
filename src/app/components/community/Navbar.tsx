@@ -3,12 +3,14 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { AvatarMenu } from "../AvatarMenu";
+import { useRouter } from "next/navigation";
 
 interface Props {
 	className?: string;
 }
 
 export default function Navbar() {
+	const router = useRouter();
 	return (
 		<div className="sticky top-0 z-10 bg-topbar ">
 			<nav className="  mx-auto flex h-16 max-w-[calc(var(--screen-max)+20rem)]  items-center  justify-between   px-4 py-2 sm:flex-row sm:justify-between sm:px-4">
@@ -33,7 +35,12 @@ export default function Navbar() {
 				</div>
 
 				<div className="mb-2 flex items-center  space-x-4 sm:mb-0 sm:space-x-4">
-					<Button className="rounded-md bg-accent px-4 py-2 text-white">Create Post</Button>
+					<Button
+						onClick={() => router.push("/journal/create")}
+						className="rounded-md bg-accent px-4 py-2 text-white"
+					>
+						Create Post
+					</Button>
 					<BellIcon className="h-6 w-6 text-gray-200" />
 					<AvatarMenu />
 				</div>

@@ -117,7 +117,9 @@ export default function CreateCommunity() {
 			}}
 		>
 			<DialogTrigger asChild>
-				<Button className="rounded-md bg-accent px-4 py-2 text-white">Create Community</Button>
+				<Button className="rounded-md bg-accent px-4 py-2 text-white hover:bg-accent hover:opacity-80 ">
+					Create Community
+				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[530px]">
 				<DialogHeader>

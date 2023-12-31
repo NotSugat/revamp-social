@@ -1,13 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import {
-	CardTitle,
-	CardDescription,
-	CardHeader,
-	CardContent,
-	CardFooter,
-	Card,
-} from "@/components/ui/card";
 import { cn, fullDate } from "@/lib/utils";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
@@ -16,8 +8,7 @@ import { GetSingleCommunity } from "@/graphql/queries.graphql";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { Community } from "@/generated/graphql";
-import { CommunityCard } from "@/app/components/CommunityCard";
-import JournalCard from "@/app/components/JournalCard";
+import JournalPostCard from "@/app/components/community/JournalPostCard";
 
 const Li = ({
 	icon,
@@ -108,8 +99,10 @@ export default function CommunityDetail({
 						<ShareGoalBar />
 						<div className="space-y-2">
 							{community?.journals?.map(journal => (
-								<JournalCard key={journal.journalId} journal={journal} id={journal.journalId} />
+								<JournalPostCard key={journal.journalId} journal={journal} id={journal.journalId} />
 							))}
+
+							{community?.goals?.map(goal => <JournalPostCard key={goal.goalId} item={goal} />)}
 						</div>
 					</div>
 					<div className="col-span-1">
