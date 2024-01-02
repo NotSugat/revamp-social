@@ -22,8 +22,8 @@ mutation CreateCommunity($input: CreateCommunityInput!) {
 	createCommunity(input: $input)
 }
 
-mutation InviteUserToCommunity($communityId: Int!, $userId: ID!) {
-	inviteUserToCommunity(communityId: $communityId, userId: $userId)
+mutation InviteUserToCommunity($communityId: Int!, $username: String!) {
+	inviteUserToCommunity(communityId: $communityId, username: $username)
 }
 
 mutation AcceptCommunityInvite($communityId: Int!) {
@@ -32,28 +32,26 @@ mutation AcceptCommunityInvite($communityId: Int!) {
 mutation DeclineCommunityInvite($communityId: Int!) {
 	declineCommunityInvite(communityId: $communityId)
 }
-
 mutation LeaveCommunity($communityId: Int!) {
 	leaveCommunity(communityId: $communityId)
 }
-
-mutation BlockUserFromCommunity($communityId: Int!, $userId: ID!) {
-	blockUserFromCommunity(communityId: $communityId, userId: $userId)
+mutation BlockUserFromCommunity($communityId: Int!, $username: String!) {
+	blockUserFromCommunity(communityId: $communityId, username: $username)
 }
-mutation UnblockUserFromCommunity($communityId: Int!, $userId: ID!) {
-	unBlockUserFromCommunity(communityId: $communityId, userId: $userId)
-}
-
-mutation RemoveUserFromCommunity($communityId: Int!, $userId: ID!) {
-	removeUserFromCommunity(communityId: $communityId, userId: $userId)
+mutation UnblockUserFromCommunity($communityId: Int!, $username: String!) {
+	unBlockUserFromCommunity(communityId: $communityId, username: $username)
 }
 
-mutation AddUserToCommunity($communityId: Int!, $userId: ID!) {
-	addUserToCommunity(communityId: $communityId, userId: $userId)
+mutation RemoveUserFromCommunity($communityId: Int!, $username: String!) {
+	removeUserFromCommunity(communityId: $communityId, username: $username)
 }
 
-mutation MakeUserAdminOfCommunity($communityId: Int!, $userId: ID!) {
-	makeUserAdminOfCommunity(communityId: $communityId, userId: $userId)
+mutation AddUserToCommunity($communityId: Int!, $username: String!) {
+	addUserToCommunity(communityId: $communityId, username: $username)
+}
+
+mutation MakeUserAdminOfCommunity($communityId: Int!, $username: String!) {
+	makeUserAdminOfCommunity(communityId: $communityId, username: $username)
 }
 
 mutation EnterInCommunity($communityId: Int!) {

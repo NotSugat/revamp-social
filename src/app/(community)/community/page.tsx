@@ -35,21 +35,6 @@ const Community = ({
 	};
 }) => {
 	const dispatch = useDispatch<AppDispatch>();
-	const [loading, setLoading] = useState(true);
-	const [community, setCommunity] = useState<any>({});
-
-	const { communityId } = params;
-	const { data, loading: queryLoading } = useQuery(GetSingleCommunity, {
-		variables: {
-			communityId: communityId,
-		},
-	});
-
-	useEffect(() => {
-		if (data) {
-			setLoading(false);
-		}
-	}, [data, dispatch]);
 
 	return (
 		<div className=" relative mx-auto flex max-w-[--screen-max] flex-col md:flex-row  ">

@@ -19,6 +19,9 @@ import { CreateCommunity as CreateCommunityMutation } from "@/graphql/mutations.
 import { CreateCommunityInput } from "@/generated/graphql";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useMutation } from "@apollo/client";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, useAppSelector } from "@/redux/store";
+import { setCommunityChanged } from "@/redux/features/communitySlice";
 
 const PrivacyLabel = ({
 	icon,
@@ -72,6 +75,8 @@ const CommunityPrivacy = ({ setPrivacy }: { setPrivacy: Dispatch<SetStateAction<
 
 export default function CreateCommunity() {
 	const [privacy, setPrivacy] = useState("public");
+	const dispatch = useDispatch<AppDispatch>();
+
 	const {
 		register,
 		handleSubmit,
@@ -106,6 +111,7 @@ export default function CreateCommunity() {
 
 		reset();
 		setDialogOpen(false);
+		dispatch(setCommunityChanged());
 	};
 
 	return (

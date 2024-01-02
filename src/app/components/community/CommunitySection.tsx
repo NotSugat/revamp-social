@@ -1,5 +1,6 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CommunityCard, SkeletonCommunityCard } from "../CommunityCard";
+import { useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
 import { Community } from "@/generated/graphql";
 import { useQuery } from "@apollo/client";
@@ -8,6 +9,7 @@ import { GetCommunities } from "@/graphql/queries.graphql";
 const CommunitySection = () => {
 	const [communities, setCommunities] = useState<Community[]>([]);
 	const [loading, setLoading] = useState(true);
+	const communityChanged = useAppSelector(state => state.community.communityChanged);
 
 	const { error: _error, data, refetch, loading: QueryLoading } = useQuery(GetCommunities);
 
@@ -17,6 +19,11 @@ const CommunitySection = () => {
 			setLoading(false);
 		}
 	}, [setCommunities, data]);
+
+	useEffect(() => {
+		refetch();
+		console.log("refetching");
+	}, [refetch, communityChanged]);
 
 	if (loading) {
 		return (

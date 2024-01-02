@@ -154,8 +154,16 @@ query GetSingleCommunity($communityId: Int!) {
 			title
 			content
 			date
+			createdBy {
+				id
+				firstName
+				lastName
+				username
+				imageUrl
+			}
 			sharedBy {
 				sharedBy {
+					id
 					firstName
 					lastName
 					username
@@ -201,5 +209,14 @@ query MyCommunities {
 			}
 			role
 		}
+	}
+}
+
+query InvitedUsersInCommunity($communityNametag: String!) {
+	invitedUsersInCommunity(communityNametag: $communityNametag) {
+		id
+		username
+		lastName
+		lastName
 	}
 }

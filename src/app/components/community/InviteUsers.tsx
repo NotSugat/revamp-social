@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { User, UserWithLessDetails } from "@/generated/graphql";
 import { InviteUserToCommunity } from "@/graphql/mutations.graphql";
 import { useParams } from "next/navigation";
+import { InvitedUsersInCommunity } from "@/graphql/queries.graphql";
 
 const UserInfo = ({ user }: { user: UserWithLessDetails }) => {
 	const [isInvited, setIsInvited] = useState(false);
@@ -26,12 +27,12 @@ const UserInfo = ({ user }: { user: UserWithLessDetails }) => {
 
 	const handleInvite = async () => {
 		setIsInvited(!isInvited);
-		// await inviteUserToCommunity({
-		// 	variables: {
-		// 		communityId: +params.communityId,
-		// 		userId: user.id,
-		// 	},
-		// });
+		await inviteUserToCommunity({
+			variables: {
+				communityId: +params.communityId,
+				username: user.username,
+			},
+		});
 		console.log(data, +params.communityId, user.id);
 	};
 	return (
@@ -59,21 +60,46 @@ const UserInfo = ({ user }: { user: UserWithLessDetails }) => {
 	);
 };
 
-export default function InviteUsers() {
+export default function InviteUsers({
+	communityNametag,
+}: {
+	communityNametag: string | undefined;
+}) {
+	const [dialogOpen, setDialogOpen] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [users, setUsers] = useState<UserWithLessDetails[]>([]);
 	const { data, loading: queryLoading } = useQuery(GetUsers);
+	const { data: invitedUserData, loading: invitedQueryLoading } = useQuery(
+		InvitedUsersInCommunity,
+		{
+			variables: {
+				communityNametag: communityNametag,
+			},
+		},
+	);
 
 	useEffect(() => {
 		if (data) {
 			console.log(data.getAllUsers);
+
 			setUsers(data.getAllUsers);
 			setLoading(false);
 		}
-	}, [setLoading, setUsers, data]);
+	}, [setLoading, setUsers, data, invitedUserData]);
+
+	useEffect(() => {
+		if (invitedUserData) {
+			console.log(invitedUserData);
+		}
+	}, [setLoading, invitedUserData]);
 
 	return (
-		<Dialog>
+		<Dialog
+			open={dialogOpen}
+			onOpenChange={() => {
+				setDialogOpen(!dialogOpen);
+			}}
+		>
 			<DialogTrigger asChild>
 				<Button className="btn">Invite Users</Button>
 			</DialogTrigger>
@@ -98,7 +124,9 @@ export default function InviteUsers() {
 					</div>
 				</div>
 				<DialogFooter>
-					<Button variant="ghost">Close</Button>
+					<Button variant="ghost" onClick={() => setDialogOpen(!dialogOpen)}>
+						Close
+					</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

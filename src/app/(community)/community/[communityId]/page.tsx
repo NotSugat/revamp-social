@@ -12,6 +12,7 @@ import JournalPostCard from "@/app/components/community/JournalPostCard";
 import { SkeletonCommunityCard } from "@/app/components/CommunityCard";
 import SkeletonCommunityPage from "@/app/components/skeleton/SkeletonCommunityPage";
 import InviteUsers from "@/app/components/community/InviteUsers";
+import GoalPostCard from "@/app/components/community/GoalPostCard";
 
 const Li = ({
 	icon,
@@ -94,7 +95,7 @@ export default function CommunityDetail({
 						<Button className="btn rounded-full ">Joined</Button>
 					</div>
 					<div className="flex items-center space-x-4">
-						<InviteUsers />
+						<InviteUsers communityNametag={community?.nametag} />
 						<Button className=" rounded-full p-2 px-3">
 							<BellIcon className="h-4 w-4" />
 						</Button>
@@ -107,10 +108,10 @@ export default function CommunityDetail({
 						<ShareGoalBar />
 						<div className="space-y-2">
 							{community?.journals?.map(journal => (
-								<JournalPostCard key={journal.journalId} journal={journal} id={journal.journalId} />
+								<JournalPostCard key={journal.journalId} journal={journal} />
 							))}
 
-							{community?.goals?.map(goal => <JournalPostCard key={goal.goalId} item={goal} />)}
+							{community?.goals?.map(goal => <GoalPostCard key={goal.goalId} goal={goal} />)}
 						</div>
 					</div>
 					<div className="col-span-1">
