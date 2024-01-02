@@ -57,3 +57,12 @@ mutation MakeUserAdminOfCommunity($communityId: Int!, $username: String!) {
 mutation EnterInCommunity($communityId: Int!) {
 	enterInCommunity(communityId: $communityId)
 }
+
+# Sharing Mutations
+mutation ShareGoal($goalId: Int!, $communityId: Int!) {
+	shareGoal(goalId: $goalId, communityId: $communityId)
+}
+
+mutation ShareJournal($journalId: Int!, $communityId: Int!) {
+	shareJournal(journalId: $journalId, communityId: $communityId)
+}

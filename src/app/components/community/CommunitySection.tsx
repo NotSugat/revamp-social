@@ -22,7 +22,6 @@ const CommunitySection = () => {
 
 	useEffect(() => {
 		refetch();
-		console.log("refetching");
 	}, [refetch, communityChanged]);
 
 	if (loading) {

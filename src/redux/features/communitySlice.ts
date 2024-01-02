@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface CommunityState {
 	isMyCommunity: boolean;
 	communityChanged: boolean;
+	communityGoalUpdated: boolean;
 }
 
 const communityState: CommunityState = {
 	isMyCommunity: false,
 	communityChanged: false,
+	communityGoalUpdated: false,
 };
 
 export const community = createSlice({
@@ -20,8 +22,11 @@ export const community = createSlice({
 		setCommunityChanged: state => {
 			state.communityChanged = !state.communityChanged;
 		},
+		setCommunityGoalUpdated: state => {
+			state.communityGoalUpdated = !state.communityGoalUpdated;
+		},
 	},
 });
 
-export const { setIsMyCommunity, setCommunityChanged } = community.actions;
+export const { setIsMyCommunity, setCommunityChanged, setCommunityGoalUpdated } = community.actions;
 export default community.reducer;

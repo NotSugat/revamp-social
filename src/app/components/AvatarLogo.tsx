@@ -1,10 +1,18 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const AvatarLogo = () => {
+const AvatarLogo = ({
+	imgSrc,
+	firstName,
+	lastName,
+}: {
+	imgSrc: string;
+	firstName: string;
+	lastName: string;
+}) => {
 	return (
 		<Avatar>
-			<AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-			<AvatarFallback>CN</AvatarFallback>
+			<AvatarImage src={imgSrc || "https://github.com/shadcn.png"} alt="@shadcn" />
+			<AvatarFallback>Cn</AvatarFallback>
 		</Avatar>
 	);
 };

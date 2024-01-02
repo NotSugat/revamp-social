@@ -17,13 +17,17 @@ export default function GoalPostCard({ goal }: { goal: Goal }) {
 		<Card className="h-[14rem] w-full rounded-lg border-none  p-1 shadow hover:cursor-pointer">
 			<CardHeader>
 				<div className="flex items-center space-x-2">
-					<AvatarLogo />
+					<AvatarLogo
+						imgSrc={goal.createdBy.imageUrl}
+						firstName={goal.createdBy.firstName}
+						lastName={goal.createdBy.lastName}
+					/>
 
 					<div>
 						<p className="text-sm font-semibold">
 							{goal.createdBy.firstName + " " + goal.createdBy.lastName}
 						</p>
-						<p className="text-xs text-gray-500">{}</p>
+						<p className="text-xs text-gray-500">@{goal.createdBy.username}</p>
 					</div>
 				</div>
 			</CardHeader>
@@ -35,7 +39,7 @@ export default function GoalPostCard({ goal }: { goal: Goal }) {
 					{goal.title}
 				</h2>
 				<Badge className="mb-4" variant="secondary">
-					#technology
+					#goal
 				</Badge>
 			</CardContent>
 			<CardFooter className="flex items-center justify-between">
@@ -45,12 +49,12 @@ export default function GoalPostCard({ goal }: { goal: Goal }) {
 					<CelebrationIcon className="cursor-pointer text-green-500 transition-colors duration-300 hover:text-green-600" />
 					{/* <HandIcon className="text-green-500 transition-colors duration-300 hover:fill-green-600" /> */}
 					<TrophyIcon className="cursor-pointer text-blue-500 transition-colors duration-300 hover:fill-blue-600" />
-					<span className="text-sm">34 reactions</span>
+					<span className="text-sm">{goal.likedBy.length} reactions</span>
 				</div>
 				<div className="flex items-center space-x-4">
 					<div className="flex items-center space-x-1">
 						<ReplyIcon className="text-gray-600" />
-						<span className="text-sm">21 comments</span>
+						<span className="text-sm">0 comments</span>
 					</div>
 					<span className="text-sm text-gray-600">4 min read</span>
 					<BookmarkIcon className="text-gray-600" />

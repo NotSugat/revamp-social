@@ -13,6 +13,8 @@ import { SkeletonCommunityCard } from "@/app/components/CommunityCard";
 import SkeletonCommunityPage from "@/app/components/skeleton/SkeletonCommunityPage";
 import InviteUsers from "@/app/components/community/InviteUsers";
 import GoalPostCard from "@/app/components/community/GoalPostCard";
+import ShareDialog from "@/app/components/ShareDialog";
+import { useAppSelector } from "@/redux/store";
 
 const Li = ({
 	icon,
@@ -48,7 +50,7 @@ const ShareGoalBar = () => {
 				<Li icon="octicon:goal-16" text="Goal" path="/goal" />
 				<Li icon="mdi:journal-outline" text="Journal" path="/journal" />
 			</div>
-			<Button className=" bg-accent">Share Goal</Button>
+			<ShareDialog />
 		</div>
 	);
 };
@@ -62,9 +64,14 @@ export default function CommunityDetail({
 }) {
 	const [loading, setLoading] = useState(true);
 	const [community, setCommunity] = useState<Community>();
+	const communityGoalUpdated = useAppSelector(state => state.community.communityGoalUpdated);
 
 	const { communityId } = params;
-	const { data, loading: queryLoading } = useQuery(GetSingleCommunity, {
+	const {
+		data,
+		loading: queryLoading,
+		refetch,
+	} = useQuery(GetSingleCommunity, {
 		variables: {
 			communityId: +communityId,
 		},
@@ -76,6 +83,11 @@ export default function CommunityDetail({
 			setLoading(false);
 		}
 	}, [data]);
+
+	useEffect(() => {
+		refetch();
+		console.log("refetching");
+	}, [refetch, communityGoalUpdated]);
 
 	if (loading) {
 		return <SkeletonCommunityPage />;
@@ -117,7 +129,7 @@ export default function CommunityDetail({
 					<div className="col-span-1">
 						<div className="space-y-4 bg-card p-4">
 							<h2 className="text-xl font-semibold">About Community</h2>
-							<p>{community?.description}</p>
+							<p className="truncate-overflow-5">{community?.description}</p>
 							<div className="flex items-center justify-between text-sm">
 								<span>Created {fullDate(community?.createdAt)}</span>
 								<span>{community?.users.length} Members</span>

@@ -19,7 +19,11 @@ export default function JournalPostCard({ journal }: { journal?: Journal }) {
 		<Card className="h-[14rem] w-full rounded-lg border-none  p-1 shadow hover:cursor-pointer">
 			<CardHeader>
 				<div className="flex items-center space-x-2">
-					<AvatarLogo />
+					<AvatarLogo
+						imgSrc={journal?.createdBy.imageUrl || ""}
+						firstName={journal?.createdBy.firstName || ""}
+						lastName={journal?.createdBy.lastName || ""}
+					/>
 
 					<div>
 						<p className="text-sm font-semibold">Sugat Sujakhu</p>

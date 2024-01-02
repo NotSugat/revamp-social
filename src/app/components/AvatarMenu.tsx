@@ -11,15 +11,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
-import AvatarLogo from "./AvatarLogo";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 export function AvatarMenu() {
 	const router = useRouter();
+	const { user } = useUser();
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<button>
-					<AvatarLogo />
+					<UserButton />
 				</button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56 bg-accent">
