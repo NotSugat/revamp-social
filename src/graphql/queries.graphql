@@ -37,6 +37,14 @@ query GetSingleGoal($goalId: Int!) {
 			order
 			isDone
 		}
+
+		createdBy {
+			id
+			firstName
+			lastName
+			username
+			imageUrl
+		}
 	}
 }
 
@@ -167,6 +175,68 @@ query GetCommunities {
 				firstName
 				lastName
 				username
+			}
+		}
+		journals {
+			journalId
+			title
+			content
+			date
+			createdBy {
+				id
+				firstName
+				lastName
+				username
+				imageUrl
+			}
+			sharedBy {
+				sharedBy {
+					id
+					firstName
+					lastName
+					username
+				}
+				sharedAt
+			}
+		}
+		goals {
+			goalId
+			title
+			description
+			priority
+			relatedArea
+			order
+			streak
+			isActive
+			deadline
+			isDone
+			createdAt
+			updatedAt
+			createdBy {
+				id
+				firstName
+				lastName
+				username
+				imageUrl
+			}
+			likedBy {
+				likedBy {
+					id
+					firstName
+					lastName
+					username
+					imageUrl
+				}
+				likedAt
+			}
+
+			tasks {
+				taskId
+				title
+				description
+				priority
+				order
+				isDone
 			}
 		}
 	}

@@ -34,7 +34,7 @@ export default function GoalPostCard({ goal }: { goal: Goal }) {
 			<CardContent>
 				<h2
 					className="my-2 text-lg font-bold transition-all duration-200 ease-in-out hover:text-blue-400"
-					onClick={() => router.push(`journal/${goal.goalId}`)}
+					onClick={() => router.push(`/goal/${goal.goalId}`)}
 				>
 					{goal.title}
 				</h2>

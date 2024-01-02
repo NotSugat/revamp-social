@@ -42,6 +42,7 @@ export default function JournalPage({ params }: { params: { journalId: string } 
 			setQuillContent(new Delta(JSON.parse(journal.content)));
 		}
 	}, [journal]);
+
 	useEffect(() => {
 		if (quillContent) {
 			const plainText = quillContent.reduce((text, op) => {
