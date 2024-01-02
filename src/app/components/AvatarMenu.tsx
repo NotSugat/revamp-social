@@ -1,3 +1,4 @@
+"use client";
 import { LogOut, Settings, User } from "lucide-react";
 
 import {
@@ -11,10 +12,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { UserButton, useClerk, useUser } from "@clerk/nextjs";
 
 export function AvatarMenu() {
 	const router = useRouter();
+	const { signOut } = useClerk();
 	const { user } = useUser();
 	return (
 		<DropdownMenu>
@@ -48,7 +50,13 @@ export function AvatarMenu() {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>
+				<DropdownMenuItem
+					onClick={() =>
+						signOut(() =>
+							router.push(process.env.NEXT_PUBLIC_LANDING_URL || "https://www.revampgoal.co"),
+						)
+					}
+				>
 					<LogOut className="mr-2 h-4 w-4" />
 					<span>Log out</span>
 				</DropdownMenuItem>

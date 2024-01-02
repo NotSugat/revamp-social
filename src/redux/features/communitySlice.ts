@@ -4,6 +4,7 @@ interface CommunityState {
 	isMyCommunity: boolean;
 	communityChanged: boolean;
 	communityGoalUpdated: boolean;
+	communityJournalUpdated?: boolean;
 }
 
 const communityState: CommunityState = {
@@ -25,8 +26,17 @@ export const community = createSlice({
 		setCommunityGoalUpdated: state => {
 			state.communityGoalUpdated = !state.communityGoalUpdated;
 		},
+
+		setCommunityJournalUpdated: state => {
+			state.communityJournalUpdated = !state.communityJournalUpdated;
+		},
 	},
 });
 
-export const { setIsMyCommunity, setCommunityChanged, setCommunityGoalUpdated } = community.actions;
+export const {
+	setIsMyCommunity,
+	setCommunityChanged,
+	setCommunityGoalUpdated,
+	setCommunityJournalUpdated,
+} = community.actions;
 export default community.reducer;

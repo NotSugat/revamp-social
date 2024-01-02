@@ -79,7 +79,7 @@ const ShareDialog = () => {
 							selected === "goal" ? (
 								<ShareGoal setDialogOpen={setDialogOpen} />
 							) : (
-								<Sharejournal />
+								<Sharejournal setDialogOpen={setDialogOpen} />
 							)}{" "}
 					</div>
 				</main>

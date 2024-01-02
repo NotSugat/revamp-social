@@ -7,7 +7,7 @@ import {
 	CommandList,
 } from "@/components/ui/command";
 import { Getjournals } from "@/graphql/queries.graphql";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useUser } from "@clerk/nextjs";
 import { Journal } from "@/generated/graphql";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -16,13 +16,24 @@ import { DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { GetJournalsOfUser } from "@/graphql/queries.graphql";
+import { ShareJournal as ShareJournalMutation } from "@/graphql/mutations.graphql";
+import { useParams } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { setCommunityJournalUpdated } from "@/redux/features/communitySlice";
 
-const Sharejournal = ({ communtiyId }: { communityId: number }) => {
+const Sharejournal = ({
+	setDialogOpen,
+}: {
+	setDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
 	const [loading, setLoading] = useState(true);
 	const [journals, setjournals] = useState<Journal[]>([]);
 	const [open, setOpen] = useState(false);
 	const [selectedjournal, setSelectedjournal] = useState<Journal | null>();
 	const { user } = useUser();
+	const params = useParams();
+	const dispatch = useDispatch<AppDispatch>();
 
 	const {
 		error: _error,
@@ -31,7 +42,23 @@ const Sharejournal = ({ communtiyId }: { communityId: number }) => {
 	} = useQuery(GetJournalsOfUser, {
 		variables: { userId: user?.id },
 	});
-	// initial data fetch
+
+	const [shareJournal, { error }] = useMutation(ShareJournalMutation);
+
+	const handleClick = async () => {
+		if (!selectedjournal) return;
+
+		await shareJournal({
+			variables: {
+				journalId: selectedjournal.journalId,
+				communityId: +params.communityId,
+			},
+		});
+
+		dispatch(setCommunityJournalUpdated());
+		setDialogOpen(false);
+	};
+
 	useEffect(() => {
 		if (data) {
 			const fetchedjournals: Journal[] = data.getJournalsOfUser;
@@ -82,9 +109,7 @@ const Sharejournal = ({ communtiyId }: { communityId: number }) => {
 											onSelect={value => {
 												console.log(value);
 												console.log(journals);
-												setSelectedjournal(
-													journals.find(journal => journal.title.toLowerCase() == value) || null,
-												);
+												setSelectedjournal(journal);
 												console.log(selectedjournal);
 												setOpen(false);
 											}}
@@ -102,7 +127,9 @@ const Sharejournal = ({ communtiyId }: { communityId: number }) => {
 				</Popover>
 			</div>
 
-			<Button type="submit">Share journal</Button>
+			<Button type="submit" onClick={handleClick}>
+				Share journal
+			</Button>
 		</div>
 	);
 };

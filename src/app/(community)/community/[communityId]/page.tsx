@@ -65,6 +65,7 @@ export default function CommunityDetail({
 	const [loading, setLoading] = useState(true);
 	const [community, setCommunity] = useState<Community>();
 	const communityGoalUpdated = useAppSelector(state => state.community.communityGoalUpdated);
+	const communityJournalUpdated = useAppSelector(state => state.community.communityJournalUpdated);
 
 	const { communityId } = params;
 	const {
@@ -86,8 +87,7 @@ export default function CommunityDetail({
 
 	useEffect(() => {
 		refetch();
-		console.log("refetching");
-	}, [refetch, communityGoalUpdated]);
+	}, [refetch, communityGoalUpdated, communityJournalUpdated]);
 
 	if (loading) {
 		return <SkeletonCommunityPage />;

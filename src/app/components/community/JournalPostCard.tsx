@@ -13,7 +13,6 @@ interface Props {
 
 export default function JournalPostCard({ journal }: { journal?: Journal }) {
 	const router = useRouter();
-	const id = 14;
 
 	return (
 		<Card className="h-[14rem] w-full rounded-lg border-none  p-1 shadow hover:cursor-pointer">
@@ -26,20 +25,22 @@ export default function JournalPostCard({ journal }: { journal?: Journal }) {
 					/>
 
 					<div>
-						<p className="text-sm font-semibold">Sugat Sujakhu</p>
-						<p className="text-xs text-gray-500">Jan 20</p>
+						<p className="text-sm font-semibold">
+							{journal?.createdBy.firstName + " " + journal?.createdBy.lastName}
+						</p>
+						<p className="text-xs text-gray-500">@{journal?.createdBy.username}</p>
 					</div>
 				</div>
 			</CardHeader>
 			<CardContent>
 				<h2
 					className="my-2 text-lg font-bold transition-all duration-200 ease-in-out hover:text-blue-400"
-					onClick={() => router.push(`journal/${id}`)}
+					onClick={() => router.push(`/journal/${journal?.journalId}`)}
 				>
-					{`Tech Trends and "The Emerging Innovations" Insights`}
+					{journal?.title}
 				</h2>
 				<Badge className="mb-4" variant="secondary">
-					#technology
+					#journal
 				</Badge>
 			</CardContent>
 			<CardFooter className="flex items-center justify-between">

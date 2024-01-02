@@ -1,11 +1,58 @@
+"use client";
 import AvatarLogo from "@/app/components/AvatarLogo";
 import { Button } from "@/components/ui/button";
+import { Journal } from "@/generated/graphql";
+import { useQuery } from "@apollo/client";
+import { GetSingleJournal } from "@/graphql/queries.graphql";
+import { useEffect, useState } from "react";
+import { formatDate } from "@/lib/utils";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import Delta from "quill-delta";
 
 interface Props {
 	className?: string;
 }
 
-export default function JournalPage() {
+export default function JournalPage({ params }: { params: { journalId: string } }) {
+	const [journal, setJournal] = useState<Journal>();
+	const [loading, setLoading] = useState(true);
+	const [quillContent, setQuillContent] = useState<Delta>();
+	const [lines, setLines] = useState<string[]>([]);
+	const {
+		error: _error,
+		data,
+		loading: fetchLoading,
+	} = useQuery(GetSingleJournal, {
+		variables: {
+			journalId: +params.journalId,
+		},
+	});
+
+	useEffect(() => {
+		if (data) {
+			setJournal(data.getSingleJournal);
+			console.log(data);
+			setLoading(false);
+		}
+	}, [setJournal, data]);
+
+	useEffect(() => {
+		if (journal) {
+			setQuillContent(new Delta(JSON.parse(journal.content)));
+		}
+	}, [journal]);
+	useEffect(() => {
+		if (quillContent) {
+			const plainText = quillContent.reduce((text, op) => {
+				return typeof op.insert === "string" ? text + op.insert : text;
+			}, "");
+
+			const lines = plainText.split("\n");
+			setLines(lines);
+		}
+	}, [quillContent]);
+
 	return (
 		<div className="mx-auto flex h-full max-w-[--screen-max]  grid-cols-3 items-start  gap-4 bg-accent p-4  text-white">
 			{/* blog section */}
@@ -28,30 +75,21 @@ export default function JournalPage() {
 						<div className="mb-2 flex items-center space-x-2">
 							<AvatarLogo />
 							<div>
-								<div className="text-sm text-gray-400">smallSoHoSolo for ILLA Cloud</div>
-								<div className="text-xs text-gray-500">Posted on Dec 19</div>
+								<div className="text-sm text-gray-400">
+									{journal?.createdBy.firstName + " " + journal?.createdBy.lastName}
+								</div>
+								<div className="text-xs text-gray-500">Posted on {formatDate(journal?.date)}</div>
 							</div>
 						</div>
-						<h1 className="mb-2 text-4xl font-bold">{"It's 2024, should I choose Shadcn UI?"}</h1>
-						<div className="flex space-x-2 text-blue-400">
-							<span>#webdev</span>
-							<span>#javascript</span>
-							<span>#react</span>
-							<span>#opensource</span>
-						</div>
+
+						{lines.map((line, index) => {
+							return (
+								<p key={index} className="mt-4">
+									{line}
+								</p>
+							);
+						})}
 					</div>
-					<p className="mb-4">
-						2024 has arrived, and the ecosystem of React component libraries remains vibrant. This
-						article will dissect two currently popular component libraries from various
-						perspectives, providing an objective analysis to help users make more informed choices.
-					</p>
-					<h2 className="mb-2 text-2xl font-bold">Why Choose a Component Library?</h2>
-					<p>
-						In general, companies choose a component library when building web applications to
-						streamline repetitive tasks. Component libraries offer a range of out-of-the-box
-						components like Select, Input, CheckBox, etc. These components, with customizable styles
-						or built-in attractive styles, enable rapid development of aesthetically pleasing
-					</p>
 				</article>
 				<div className="mt-4 flex space-x-6">
 					<div className="flex items-center">
@@ -74,7 +112,11 @@ export default function JournalPage() {
 				<div className="">
 					<div className="mb-6 flex items-center justify-between">
 						<div className="flex items-center space-x-2">
-							<AvatarLogo />
+							<AvatarLogo
+								imgSrc={journal?.createdBy.imageUrl}
+								firstName={journal?.createdBy.firstName || ""}
+								lastName={journal?.createdBy.lastName || ""}
+							/>
 							<span className="text-white">Sugat</span>
 						</div>
 						<Button className="bg-blue-500 text-white">Follow</Button>

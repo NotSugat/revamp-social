@@ -100,6 +100,31 @@ query GetTodosOfTask($taskId: Int!) {
 	}
 }
 
+query GetSingleJournal($journalId: Int!) {
+	getSingleJournal(journalId: $journalId) {
+		journalId
+		title
+		content
+		date
+		createdBy {
+			id
+			firstName
+			lastName
+			username
+			imageUrl
+		}
+		sharedBy {
+			sharedBy {
+				id
+				firstName
+				lastName
+				username
+			}
+			sharedAt
+		}
+	}
+}
+
 query GetJournalsOfUser($userId: ID!) {
 	getJournalsOfUser(userId: $userId) {
 		journalId
@@ -107,7 +132,6 @@ query GetJournalsOfUser($userId: ID!) {
 		content
 		date
 		createdBy {
-			communt
 			id
 			firstName
 			lastName
