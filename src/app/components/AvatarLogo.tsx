@@ -5,9 +5,9 @@ const AvatarLogo = ({
 	firstName,
 	lastName,
 }: {
-	imgSrc: string;
-	firstName: string;
-	lastName: string;
+	imgSrc?: string;
+	firstName?: string;
+	lastName?: string;
 }) => {
 	return (
 		<Avatar>

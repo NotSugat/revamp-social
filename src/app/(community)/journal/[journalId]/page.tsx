@@ -74,7 +74,11 @@ export default function JournalPage({ params }: { params: { journalId: string } 
 				<article>
 					<div className="mb-4">
 						<div className="mb-2 flex items-center space-x-2">
-							<AvatarLogo />
+							<AvatarLogo
+								imgSrc={journal?.createdBy.imageUrl}
+								firstName={journal?.createdBy.firstName || ""}
+								lastName={journal?.createdBy.lastName || ""}
+							/>
 							<div>
 								<div className="text-sm text-gray-400">
 									{journal?.createdBy.firstName + " " + journal?.createdBy.lastName}
